@@ -1,0 +1,116 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+:root {
+  /* Palette — "ledger at midnight" */
+  --color-bg: #0a0b0f;
+  --color-surface: #13151b;
+  --color-surface-raised: #191c24;
+  --color-border: #262a35;
+  --color-border-soft: #1d2028;
+
+  --color-text: #eef0f4;
+  --color-text-muted: #8b8f9c;
+  --color-text-faint: #565a67;
+
+  --color-accent: #e8b64c;      /* amber — brand / highlights */
+  --color-accent-soft: #e8b64c1a;
+  --color-positive: #4fd1a5;    /* gains */
+  --color-positive-soft: #4fd1a51a;
+  --color-negative: #ef6b5d;    /* losses */
+  --color-negative-soft: #ef6b5d1a;
+
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body: 'IBM Plex Sans', -apple-system, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+
+  --shadow-card: 0 1px 0 rgba(255, 255, 255, 0.03) inset, 0 12px 24px -12px rgba(0, 0, 0, 0.6);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.mono {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Reusable gain/loss pill, shared between dashboard + detail views */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.badge--positive {
+  color: var(--color-positive);
+  background: var(--color-positive-soft);
+}
+
+.badge--negative {
+  color: var(--color-negative);
+  background: var(--color-negative-soft);
+}
+
+.badge__arrow {
+  font-size: 10px;
+}
+
+/* Shared card surface */
+.panel {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-soft);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+}
+
+::selection {
+  background: var(--color-accent-soft);
+  color: var(--color-accent);
+}
+
+/* Thin scrollbar to match the "ledger" tone */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 999px;
+  border: 3px solid var(--color-bg);
+}

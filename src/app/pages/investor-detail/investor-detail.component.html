@@ -1,0 +1,90 @@
+<div class="detail">
+  <a routerLink="/" class="detail__back">
+    <span aria-hidden="true">←</span> All investors
+  </a>
+
+  @if (investor(); as inv) {
+    <header class="profile panel">
+      <span class="profile__avatar">{{ inv.avatarInitials }}</span>
+      <div class="profile__info">
+        <p class="profile__eyebrow">Investor</p>
+        <h1 class="profile__name">{{ inv.name }}</h1>
+      </div>
+      <div class="profile__stats">
+        <div class="profile__stat">
+          <p class="profile__stat-label">Invested</p>
+          <p class="profile__stat-value mono">
+            {{
+              portfolioService.getTotalInvested(inv.id)
+                | currency: "USD" : "symbol" : "1.0-0"
+            }}
+          </p>
+        </div>
+        <div class="profile__stat">
+          <p class="profile__stat-label">Current value</p>
+          <p class="profile__stat-value mono">
+            {{
+              portfolioService.getCurrentValue(inv.id)
+                | currency: "USD" : "symbol" : "1.0-0"
+            }}
+          </p>
+        </div>
+        <div class="profile__stat">
+          <p class="profile__stat-label">Overall</p>
+          <span
+            class="badge"
+            [class.badge--positive]="overallGainPercent() >= 0"
+            [class.badge--negative]="overallGainPercent() < 0"
+          >
+            <span class="badge__arrow">{{
+              overallGainPercent() >= 0 ? "▲" : "▼"
+            }}</span>
+            {{ overallGainPercent() | number: "1.1-1" }}%
+          </span>
+        </div>
+      </div>
+    </header>
+  }
+
+  <section class="ledger">
+    <div class="ledger__head">
+      <span>Asset</span>
+      <span>Purchased</span>
+      <span class="ledger__num">Qty</span>
+      <span class="ledger__num">Buy price</span>
+      <span class="ledger__num">Current price</span>
+      <span class="ledger__num">Gain / Loss</span>
+    </div>
+
+    @for (position of investments(); track position.id) {
+      <div class="ledger__row">
+        <div class="ledger__asset">
+          <span class="ledger__ticker mono">{{ position.ticker }}</span>
+          <span class="ledger__asset-name">{{ position.assetName }}</span>
+        </div>
+        <span class="ledger__date mono">{{
+          position.purchaseDate | date: "d MMM y"
+        }}</span>
+        <span class="ledger__num mono">{{ position.quantity }}</span>
+        <span class="ledger__num mono">{{
+          position.purchasePrice | currency: "USD"
+        }}</span>
+        <span class="ledger__num mono">{{
+          position.currentPrice | currency: "USD"
+        }}</span>
+        <span class="ledger__num">
+          <span
+            class="badge"
+            [class.badge--positive]="position.gainPercent >= 0"
+            [class.badge--negative]="position.gainPercent < 0"
+          >
+            <span class="badge__arrow">{{
+              position.gainPercent >= 0 ? "▲" : "▼"
+            }}</span>
+            {{ position.gainPercent | number: "1.1-1" }}%
+          </span>
+        </span>
+      </div>
+    }
+  </section>
+</div>

@@ -1,0 +1,72 @@
+<div class="dashboard">
+  <header class="dashboard__header">
+    <div class="dashboard__brand">
+      <span class="dashboard__mark">V</span>
+      <div>
+        <p class="dashboard__eyebrow">Vantage</p>
+        <h1 class="dashboard__title">Investor overview</h1>
+      </div>
+    </div>
+    <p class="dashboard__subtitle">
+      Five portfolios, one ledger. See who's leading and how each position is
+      doing.
+    </p>
+  </header>
+
+  <section class="spotlight panel">
+    <div class="spotlight__label">
+      <span class="spotlight__dot" aria-hidden="true"></span>
+      Top investor
+    </div>
+    <div class="spotlight__body">
+      @if (portfolioService.getTopInvestor(); as topInvestor) {
+        <span class="spotlight__avatar">{{ topInvestor.avatarInitials }}</span>
+        <div>
+          <h2 class="spotlight__name">{{ topInvestor.name }}</h2>
+          <p class="spotlight__amount mono">
+            {{
+              portfolioService.getTotalInvested(topInvestor.id)
+                | currency: "USD" : "symbol" : "1.0-0"
+            }}
+            <span class="spotlight__amount-label">invested</span>
+          </p>
+        </div>
+      }
+    </div>
+  </section>
+
+  <section class="chart-panel panel">
+    <div class="chart-panel__head">
+      <h3>Total invested by investor</h3>
+      <p class="chart-panel__hint">
+        Click a bar to open that investor's positions
+      </p>
+    </div>
+    <div class="chart-panel__canvas-wrap">
+      <canvas #chartCanvas></canvas>
+    </div>
+  </section>
+
+  <section class="investor-grid">
+    @for (investor of investors(); track investor.id) {
+      <a
+        class="investor-card"
+        [routerLink]="['/investor', investor.id]"
+        (click)="onInvestorSelected(investor.id)"
+      >
+        <span class="investor-card__avatar">{{ investor.avatarInitials }}</span>
+        <div class="investor-card__info">
+          <h4 class="investor-card__name">{{ investor.name }}</h4>
+          <p class="investor-card__amount mono">
+            {{
+              portfolioService.getTotalInvested(investor.id)
+                | currency: "USD" : "symbol" : "1.0-0"
+            }}
+            invested
+          </p>
+        </div>
+        <span class="investor-card__arrow" aria-hidden="true">→</span>
+      </a>
+    }
+  </section>
+</div>

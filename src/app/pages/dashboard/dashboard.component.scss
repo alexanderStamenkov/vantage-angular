@@ -1,0 +1,235 @@
+.dashboard {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 64px 24px 96px;
+}
+
+/* ---------- Header ---------- */
+
+.dashboard__header {
+  margin-bottom: 40px;
+  animation: rise 0.6s ease both;
+}
+
+.dashboard__brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.dashboard__mark {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: linear-gradient(155deg, var(--color-accent), #b8863a);
+  color: #17140a;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 20px;
+}
+
+.dashboard__eyebrow {
+  margin: 0 0 2px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-text-faint);
+}
+
+.dashboard__title {
+  font-size: 26px;
+}
+
+.dashboard__subtitle {
+  max-width: 44ch;
+  color: var(--color-text-muted);
+  font-size: 15px;
+}
+
+/* ---------- Spotlight ---------- */
+
+.spotlight {
+  padding: 24px 28px;
+  margin-bottom: 20px;
+  animation: rise 0.6s ease 0.05s both;
+}
+
+.spotlight__label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: 16px;
+}
+
+.spotlight__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  box-shadow: 0 0 0 4px var(--color-accent-soft);
+}
+
+.spotlight__body {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.spotlight__avatar {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--color-surface-raised);
+  border: 1px solid var(--color-border);
+  font-family: var(--font-display);
+  font-size: 20px;
+  color: var(--color-text-muted);
+}
+
+.spotlight__name {
+  font-size: 22px;
+  margin-bottom: 4px;
+}
+
+.spotlight__amount {
+  font-size: 15px;
+  color: var(--color-text);
+}
+
+.spotlight__amount-label {
+  font-family: var(--font-body);
+  color: var(--color-text-faint);
+  font-size: 13px;
+}
+
+/* ---------- Chart panel ---------- */
+
+.chart-panel {
+  padding: 24px 28px 20px;
+  margin-bottom: 32px;
+  animation: rise 0.6s ease 0.1s both;
+}
+
+.chart-panel__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  gap: 12px;
+}
+
+.chart-panel__head h3 {
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.chart-panel__hint {
+  margin: 0;
+  font-size: 12.5px;
+  color: var(--color-text-faint);
+}
+
+.chart-panel__canvas-wrap {
+  position: relative;
+  height: 260px;
+}
+
+/* ---------- Investor grid ---------- */
+
+.investor-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+.investor-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 18px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-soft);
+  border-radius: var(--radius-md);
+  transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+  animation: rise 0.5s ease both;
+
+  &:hover {
+    transform: translateY(-2px);
+    border-color: var(--color-accent-soft);
+    background: var(--color-surface-raised);
+  }
+
+  &:hover .investor-card__arrow {
+    transform: translateX(2px);
+    opacity: 1;
+  }
+}
+
+@for $i from 1 through 5 {
+  .investor-card:nth-child(#{$i}) {
+    animation-delay: #{0.12 + $i * 0.05}s;
+  }
+}
+
+.investor-card__avatar {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--color-surface-raised);
+  border: 1px solid var(--color-border);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--color-text-muted);
+}
+
+.investor-card__info {
+  flex: 1;
+  min-width: 0;
+}
+
+.investor-card__name {
+  font-size: 15px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  margin-bottom: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.investor-card__amount {
+  margin: 0;
+  font-size: 13px;
+  color: var(--color-text-faint);
+}
+
+.investor-card__arrow {
+  color: var(--color-text-faint);
+  opacity: 0.5;
+  transition: transform 0.18s ease, opacity 0.18s ease;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
